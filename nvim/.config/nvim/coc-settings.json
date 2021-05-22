@@ -1,0 +1,16 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "typescriptreact",
+    "typescript",
+    "json",
+    "sh",
+    "javascript",
+    "javascriptreact",
+    "css",
+    "html",
+    "vim",
+    "prisma",
+    "python"
+  ],
+  "prettier.doubleQuote": true
+}

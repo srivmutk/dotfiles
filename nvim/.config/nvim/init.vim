@@ -12,9 +12,14 @@ call plug#begin('/etc/.nvim/plugged')
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 	Plug 'tarekbecker/vim-yaml-formatter' 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'leafgarland/typescript-vim'
+	Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 colorscheme jellybeans
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+autocmd! BufWritePre Prettier
+
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 function Term()
@@ -44,6 +49,19 @@ autocmd BufEnter NERD_tree_* | execute 'normal R'
 :let NERDTreeShowHidden=1
 let g:NERDTreeWinSize=25
 
+let g:coc_global_extensions = [
+      \'coc-markdownlint',
+      \'coc-highlight',
+      \'coc-vetur',
+      \'coc-go',
+      \'coc-pyright',
+      \'coc-json',	 
+      \'coc-tsserver', 
+      \'coc-sh', 
+      \'coc-git',
+      \'coc-prisma',
+      \'coc-prettier'
+\]
 
 map <C-u> :u<CR>
 map <C-t> :call Term()<CR>
@@ -171,7 +189,7 @@ omap ac <Plug>(coc-classobj-a)
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+ nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
   inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -214,4 +232,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
+ 

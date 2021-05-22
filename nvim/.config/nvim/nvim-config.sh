@@ -10,3 +10,6 @@
 	sudo mkdir /etc/.nvim/plugged
 	sudo chown $USER:$USER -R /etc/.nvim
 	sudo ln -sf /etc/.nvim/site/autoload/plug.vim ~/.local/share/nvim
+
+# Install NodeJS
+	curl -sL install-node.now.sh/lts | bash

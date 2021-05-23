@@ -42,11 +42,16 @@
 " vim-plug config
 
 	call plug#begin('/etc/.nvim/plugged')
+		" colorscheme
 		Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
+		
+		" git
 		Plug 'tpope/vim-fugitive'
+		
+		" statusline
 		Plug 'vim-airline/vim-airline'
 		
-		" for filetree
+		" filetree
 		Plug 'preservim/nerdtree'
 		
 		" icons on filetree
@@ -66,6 +71,7 @@
 
 		" typscript syntax highlighting
 		Plug 'HerringtonDarkholme/yats.vim' 
+		" surround text
 		Plug 'tpope/vim-surround'
 	call plug#end()
 
@@ -160,11 +166,14 @@
 	autocmd StdinReadPre * let s:std_in=1
 	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call NerdTree() | wincmd p | ene | exe 'cd '.argv()[0] | endif
 	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call Term() | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-
+	
+	"
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+	
+	" -> NERDTree Window Size
 	:let NERDTreeShowHidden=1
 	let g:NERDTreeWinSize=25
+
 	" -> Autorefresh NERDTree
 	autocmd BufEnter NERD_tree_* | execute 'normal R'
 

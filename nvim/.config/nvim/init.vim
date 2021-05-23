@@ -117,9 +117,14 @@
 	map <C-u> :u<CR>
 	map <C-t> :call Term()<CR>
 	map <C-q> :qa! <CR>
+	map <C-m> :MarkdownPreview <CR>
+	nnoremap <space>gt :Git commit -am %:p<CR>
 
 	" -> spellcheck
 	autocmd BufRead,BufNewFile *.md setlocal spell
+	
+	" -> jsonc 
+	autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " --------------------------------------------------------------------- 
 
@@ -130,18 +135,25 @@
 
 	" coc language extensions
 	let g:coc_global_extensions = [
-	      \'coc-markdownlint',
-	      \'coc-highlight',
-	      \'coc-vetur',
-	      \'coc-go',
-	      \'coc-pyright',
-	      \'coc-json',	 
-	      \'coc-tsserver', 
-	      \'coc-sh', 
-	      \'coc-git',
-	      \'coc-prisma', 
-	      \'coc-pairs',
-	      \'coc-prettier'
+		\'coc-markdownlint',
+		\'coc-highlight',
+		\'coc-vetur',
+		\'coc-go',
+		\'coc-pyright',
+		\'coc-json',	 
+		\'coc-tsserver', 
+		\'coc-sh', 
+		\'coc-git',
+		\'coc-prisma', 
+		\'coc-pairs',
+		\'coc-prettier',
+		\'coc-go',
+		\'coc-clangd',
+		\'coc-elixir',
+		\'coc-css',
+		\'coc-tailwindcss',
+		\'coc-html',
+		\'coc-rls'
 	\]
 
 	" Always show the signcolumn, otherwise it would shift the text each time
@@ -288,7 +300,7 @@
 	nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 	" Resume latest coc list.
 	nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
- 
+
 " --------------------------------------------------------------------- 
 
 

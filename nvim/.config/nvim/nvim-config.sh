@@ -13,3 +13,6 @@
 
 # Install NodeJS
 	curl -sL install-node.now.sh/lts | bash
+
+# Install Language Server Extentions
+sudo npm i -g sql-language-server

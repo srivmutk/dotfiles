@@ -1,3 +1,4 @@
-## Sysnomid's Personal Dotfiles
-Dotfiles for Neovim, Bash, and Tmux
+# Sysnomid's Personal Dotfiles
+
+Dotfiles for Neovim, Bash, and Tmux.
 

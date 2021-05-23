@@ -74,9 +74,6 @@
 
 		" typscript syntax highlighting
 		Plug 'HerringtonDarkholme/yats.vim' 
-
-		" surround text
-		Plug 'tpope/vim-surround'
 	call plug#end()
 
 " --------------------------------------------------------------------- 
@@ -118,7 +115,7 @@
 	map <C-t> :call Term()<CR>
 	map <C-q> :qa! <CR>
 	map <C-m> :MarkdownPreview <CR>
-	nnoremap <space>gt :Git commit -am %:p<CR>
+	nnoremap <space>gt :Git commit -v -q %:p<CR>
 
 	" -> spellcheck
 	autocmd BufRead,BufNewFile *.md setlocal spell

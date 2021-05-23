@@ -41,9 +41,10 @@
 
 
 " --------------------------------------------------------------------- 
-" vim-plug config
+" ===> vim-plug config
 
 	call plug#begin('/etc/.nvim/plugged')
+		
 		" colorscheme
 		Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
 		
@@ -65,6 +66,9 @@
 		
 		" autocompletion and error messages 
 		Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	
+		" typscript syntax highlighting
+		Plug 'HerringtonDarkholme/yats.vim' 
 
 		" gql syntax highlighting
 		Plug 'jparise/vim-graphql'
@@ -72,8 +76,6 @@
 		" auto close html tags
 		Plug 'alvan/vim-closetag'
 
-		" typscript syntax highlighting
-		Plug 'HerringtonDarkholme/yats.vim' 
 	call plug#end()
 
 " --------------------------------------------------------------------- 
@@ -115,7 +117,7 @@
 	map <C-t> :call Term()<CR>
 	map <C-q> :qa! <CR>
 	map <C-m> :MarkdownPreview <CR>
-	nnoremap <space>gt :Git commit -v -q %:p<CR>
+	tnoremap gc :Git
 
 	" -> spellcheck
 	autocmd BufRead,BufNewFile *.md setlocal spell
@@ -263,8 +265,8 @@
 
 	" Use CTRL-S for selections ranges.
 	" Requires 'textDocument/selectionRange' support of language server.
-	nmap <silent> <C-s> <Plug>(coc-range-select)
-	xmap <silent> <C-s> <Plug>(coc-range-select)
+	nmap <silent> <C-l> <Plug>(coc-range-select)
+	xmap <silent> <C-l> <Plug>(coc-range-select)
 
 	" Add `:Format` command to format current buffer.
 	command! -nargs=0 Format :call CocAction('format')

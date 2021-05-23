@@ -38,6 +38,8 @@
 
 " --------------------------------------------------------------------- 
 
+
+
 " --------------------------------------------------------------------- 
 " vim-plug config
 
@@ -57,6 +59,7 @@
 		" icons on filetree
 		Plug 'ryanoasis/vim-devicons'
 
+		" md preview & yaml formatting
 		Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 		Plug 'tarekbecker/vim-yaml-formatter'
 		
@@ -71,11 +74,13 @@
 
 		" typscript syntax highlighting
 		Plug 'HerringtonDarkholme/yats.vim' 
+
 		" surround text
 		Plug 'tpope/vim-surround'
 	call plug#end()
 
 " --------------------------------------------------------------------- 
+
 
 
 " --------------------------------------------------------------------- 
@@ -119,66 +124,6 @@
 " --------------------------------------------------------------------- 
 
 
-" --------------------------------------------------------------------- 
-" ===> HTML Tag Autocompletion
-"
-	" filenames like *.xml, *.html, *.xhtml, ...
-	" These are the file extensions where this plugin is enabled.
-	let g:closetag_filenames = '*.html,*.xhtml,*.jsx,*.js,*.tsx'
-
-	" filenames like *.xml, *.xhtml, ...
-	" This will make the list of non-closing tags self-closing in the specified files.
-	let g:closetag_xhtml_filenames = '*.xml,*.xhtml,*.jsx,*.js,*.tsx'
-
-	" filetypes like xml, html, xhtml, ...
-	" These are the file types where this plugin is enabled.
-	let g:closetag_filetypes = 'html,xhtml,jsx,js,tsx'
-
-	" filetypes like xml, xhtml, ...
-	" This will make the list of non-closing tags self-closing in the specified files.
-	let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,js,tsx'
-
-	" integer value [0|1]
-	" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-	let g:closetag_emptyTags_caseSensitive = 1
-
-	" Disables auto-close if not in a "valid" region (based on filetype)
-	let g:closetag_regions = {
-			\ 'typescript.tsx': 'jsxRegion,tsxRegion',
-			\ 'javascript.jsx': 'jsxRegion',
-			\ }
-	" Shortcut for closing tags, default is '>'
-	let g:closetag_shortcut = '>'
-
-	" Add > at current position without closing the current tag, default is ''
-	let g:closetag_close_shortcut = '<leader>>'
-
-" --------------------------------------------------------------------- 
-
-
-" --------------------------------------------------------------------- 
-" ===> NERDTree and integrated terminal setup
-
-	autocmd StdinReadPre * let s:std_in=1
-	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
-	" -> Run NERDTree and Integrated Terminal, if you are in a directory 
-	autocmd StdinReadPre * let s:std_in=1
-	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call NerdTree() | wincmd p | ene | exe 'cd '.argv()[0] | endif
-	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call Term() | wincmd p | ene | exe 'cd '.argv()[0] | endif
-	
-	"
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-	
-	" -> NERDTree Window Size
-	:let NERDTreeShowHidden=1
-	let g:NERDTreeWinSize=25
-
-	" -> Autorefresh NERDTree
-	autocmd BufEnter NERD_tree_* | execute 'normal R'
-
-" --------------------------------------------------------------------- 
-
 
 " --------------------------------------------------------------------- 
 " ===> coc.nvim Setup
@@ -186,11 +131,7 @@
 	" coc language extensions
 	let g:coc_global_extensions = [
 	      \'coc-markdownlint',
-	      
-	      " color highlight
 	      \'coc-highlight',
-	      
-	     " language support
 	      \'coc-vetur',
 	      \'coc-go',
 	      \'coc-pyright',
@@ -199,14 +140,9 @@
 	      \'coc-sh', 
 	      \'coc-git',
 	      \'coc-prisma', 
-	     
-	     " auto pair quote marks
 	      \'coc-pairs',
-
-	     " code formatter
 	      \'coc-prettier'
 	\]
-
 
 	" Always show the signcolumn, otherwise it would shift the text each time
 	" diagnostics appear/become resolved.
@@ -354,3 +290,67 @@
 	nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
  
 " --------------------------------------------------------------------- 
+
+
+
+" --------------------------------------------------------------------- 
+" ===> NERDTree and integrated terminal setup
+
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+	" -> Run NERDTree and Integrated Terminal, if you are in a directory 
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call NerdTree() | wincmd p | ene | exe 'cd '.argv()[0] | endif
+	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call Term() | wincmd p | ene | exe 'cd '.argv()[0] | endif
+	
+	"
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+	
+	" -> NERDTree Window Size
+	:let NERDTreeShowHidden=1
+	let g:NERDTreeWinSize=25
+
+	" -> Autorefresh NERDTree
+	autocmd BufEnter NERD_tree_* | execute 'normal R'
+
+" ---------------------------------------------------------------------
+
+
+
+" --------------------------------------------------------------------- 
+" ===> HTML Tag Autocompletion
+"
+	" filenames like *.xml, *.html, *.xhtml, ...
+	" These are the file extensions where this plugin is enabled.
+	let g:closetag_filenames = '*.html,*.xhtml,*.jsx,*.js,*.tsx'
+
+	" filenames like *.xml, *.xhtml, ...
+	" This will make the list of non-closing tags self-closing in the specified files.
+	let g:closetag_xhtml_filenames = '*.xml,*.xhtml,*.jsx,*.js,*.tsx'
+
+	" filetypes like xml, html, xhtml, ...
+	" These are the file types where this plugin is enabled.
+	let g:closetag_filetypes = 'html,xhtml,jsx,js,tsx'
+
+	" filetypes like xml, xhtml, ...
+	" This will make the list of non-closing tags self-closing in the specified files.
+	let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,js,tsx'
+
+	" integer value [0|1]
+	" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+	let g:closetag_emptyTags_caseSensitive = 1
+
+	" Disables auto-close if not in a "valid" region (based on filetype)
+	let g:closetag_regions = {
+			\ 'typescript.tsx': 'jsxRegion,tsxRegion',
+			\ 'javascript.jsx': 'jsxRegion',
+			\ }
+	" Shortcut for closing tags, default is '>'
+	let g:closetag_shortcut = '>'
+
+	" Add > at current position without closing the current tag, default is ''
+	let g:closetag_close_shortcut = '<leader>>'
+
+" --------------------------------------------------------------------- 
+

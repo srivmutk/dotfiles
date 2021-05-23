@@ -186,7 +186,11 @@
 	" coc language extensions
 	let g:coc_global_extensions = [
 	      \'coc-markdownlint',
+	      
+	      " color highlight
 	      \'coc-highlight',
+	      
+	     " language support
 	      \'coc-vetur',
 	      \'coc-go',
 	      \'coc-pyright',
@@ -195,7 +199,11 @@
 	      \'coc-sh', 
 	      \'coc-git',
 	      \'coc-prisma', 
+	     
+	     " auto pair quote marks
 	      \'coc-pairs',
+
+	     " code formatter
 	      \'coc-prettier'
 	\]
 

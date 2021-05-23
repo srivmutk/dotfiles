@@ -50,7 +50,7 @@
 		" git
 		Plug 'tpope/vim-fugitive'
 		
-		" statusline
+		" statusbar
 		Plug 'vim-airline/vim-airline'
 		
 		" filetree

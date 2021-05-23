@@ -1,7 +1,11 @@
 set mouse=a
 set number
 set clipboard=unnamedplus
-set paste
+set nopaste
+set backspace=indent,eol,start
+set hidden
+filetype plugin indent on
+syntax on
 
 call plug#begin('/etc/.nvim/plugged')
 	Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
@@ -12,8 +16,10 @@ call plug#begin('/etc/.nvim/plugged')
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 	Plug 'tarekbecker/vim-yaml-formatter' 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'leafgarland/typescript-vim'
-	Plug 'peitalin/vim-jsx-typescript'
+	Plug 'jparise/vim-graphql'	
+	Plug 'alvan/vim-closetag'	
+	" Plug 'HerringtonDarkholme/yats.vim' 
+	Plug 'tpope/vim-surround'
 call plug#end()
 
 colorscheme jellybeans
@@ -21,6 +27,39 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 autocmd! BufWritePre Prettier
 
 autocmd BufRead,BufNewFile *.md setlocal spell
+
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+let g:closetag_filenames = '*.html,*.xhtml,*.jsx,*.js,*.tsx'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+let g:closetag_xhtml_filenames = '*.xml,*.xhtml,*.jsx,*.js,*.tsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+let g:closetag_filetypes = 'html,xhtml,jsx,js,tsx'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,js,tsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Disables auto-close if not in a "valid" region (based on filetype)
+let g:closetag_regions = {
+		\ 'typescript.tsx': 'jsxRegion,tsxRegion',
+		\ 'javascript.jsx': 'jsxRegion',
+		\ }
+
+" Shortcut for closing tags, default is '>'
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+let g:closetag_close_shortcut = '<leader>>'
+
 
 function Term()
 	set splitbelow
@@ -45,6 +84,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call Term() | wincmd p | ene | exe 'cd '.argv()[0] | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufEnter NERD_tree_* | execute 'normal R'
+autocmd Filetype css setlocal tabstop=4
 
 :let NERDTreeShowHidden=1
 let g:NERDTreeWinSize=25
@@ -59,7 +99,8 @@ let g:coc_global_extensions = [
       \'coc-tsserver', 
       \'coc-sh', 
       \'coc-git',
-      \'coc-prisma',
+      \'coc-prisma', 
+      \'coc-pairs',
       \'coc-prettier'
 \]
 
@@ -232,4 +273,5 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
  

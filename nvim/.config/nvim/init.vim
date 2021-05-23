@@ -86,21 +86,21 @@
 	autocmd! BufWritePre Prettier
 
 	" -> functions
-	" -> Integrated Terminal Setup
-	function Term()
-		set splitbelow
-		split
-		terminal
-		resize 5
-		set signcolumn=no
-		tnoremap <Esc> <C-\><C-n>
-	endfunction
+		" -> Integrated Terminal Setup
+		function Term()
+			set splitbelow
+			split
+			terminal
+			resize 5
+			set signcolumn=no
+			tnoremap <Esc> <C-\><C-n>
+		endfunction
 
-	" -> NERDTree File Tree Setup
-	function NerdTree()
-		NERDTree
-		set signcolumn=no
-	endfunction
+		" -> NERDTree File Tree Setup
+		function NerdTree()
+			NERDTree
+			set signcolumn=no
+		endfunction
 
 	" -> maps
 	map <C-u> :u<CR>

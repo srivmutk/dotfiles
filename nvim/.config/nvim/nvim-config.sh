@@ -1,10 +1,10 @@
 # Global Config Syslink
-	sudo ln -sf ~/.config/nvim/init.vim /etc/xdg/nvim
-	sudo mkdir -p /etc/xdg/nvim/autoload
-	sudo chmod 777 -R /etc/xdg/nvim
+	ln -sf ~/.config/nvim/init.vim /etc/xdg/nvim
+	mkdir -p /etc/xdg/nvim/site
+	chmod 777 -R /etc/xdg/nvim
 
 # Setup Vim Plug
-	sh -c 'curl -fLo /etc/xdg/nvim/autoload/nvim/site/autoload/plug.vim --create-dirs \
+	sh -c 'curl -fLo /etc/xdg/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # Nodejs setup

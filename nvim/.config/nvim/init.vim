@@ -1,4 +1,4 @@
-" ====> SYSNOMID's init.vim
+ " ====> SYSNOMID's init.vim
 
 " --------------------------------------------------------------------- 
 " ===> General Setup
@@ -35,7 +35,7 @@
 
 	" Don't pass messages to |ins-completion-menu|.
 	set shortmess+=c
-
+	set autochdir
 " --------------------------------------------------------------------- 
 
 
@@ -43,7 +43,7 @@
 " --------------------------------------------------------------------- 
 " ===> vim-plug config
 
-	call plug#begin('/etc/xdg/nvim/autoload/nvim/site/autoload')
+	call plug#begin('/etc/xdg/nvim/site/autoload')
 		
 		" colorscheme
 		Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
@@ -124,12 +124,15 @@
 			set signcolumn=no
 		endfunction
 
-	" -> maps
-	map <C-u> :u<CR>
-	map <C-t> :call Term()<CR>
-	map <C-q> :qa! <CR>
-	map <C-m> :MarkdownPreview <CR>
-	tnoremap gc :Git
+	" -> maps  	
+		map <C-s> :w <CR>
+		map <C-u> :u<CR>
+		map <C-r> :redo<CR>
+		map <C-l> :wqa <CR>
+		map <C-q> :q <CR>
+
+		map <C-t> :call Term()<CR>
+		map <C-m> :MarkdownPreview <CR>
 
 	" -> spellcheck
 	autocmd BufRead,BufNewFile *.md setlocal spell
@@ -275,11 +278,6 @@
 	  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 	endif
 
-	" Use CTRL-S for selections ranges.
-	" Requires 'textDocument/selectionRange' support of language server.
-	nmap <silent> <C-l> <Plug>(coc-range-select)
-	xmap <silent> <C-l> <Plug>(coc-range-select)
-
 	" Add `:Format` command to format current buffer.
 	command! -nargs=0 Format :call CocAction('format')
 
@@ -326,13 +324,14 @@
 	autocmd StdinReadPre * let s:std_in=1
 	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call NerdTree() | wincmd p | ene | exe 'cd '.argv()[0] | endif
 	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call Term() | wincmd p | ene | exe 'cd '.argv()[0] | endif
-	
-	"
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-	
-	" -> NERDTree Window Size
+		
+	" -> Window Size
 	:let NERDTreeShowHidden=1
 	let g:NERDTreeWinSize=25
+
+	" -> Tree styles
+	let NERDTreeMinimalUI = 1
+	let NERDTreeDirArrows = 1
 
 	" -> Autorefresh NERDTree
 	autocmd BufEnter NERD_tree_* | execute 'normal R'

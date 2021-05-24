@@ -76,6 +76,18 @@
 		" auto close html tags
 		Plug 'alvan/vim-closetag'
 
+		" css color highlighting
+		Plug 'tpope/vim-commentary'
+
+		" notes
+		Plug 'vimwiki/vimwiki'
+		Plug 'junegunn/goyo.vim'
+
+		" comment out lines
+		Plug 'tpope/vim-commentary'
+
+		" surround
+		Plug 'tpope/vim-surround'
 	call plug#end()
 
 " --------------------------------------------------------------------- 

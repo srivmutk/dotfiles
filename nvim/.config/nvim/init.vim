@@ -43,7 +43,7 @@
 " --------------------------------------------------------------------- 
 " ===> vim-plug config
 
-	call plug#begin('/etc/.nvim/plugged')
+	call plug#begin('/etc/xdg/nvim/autoload/nvim/site/autoload')
 		
 		" colorscheme
 		Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }

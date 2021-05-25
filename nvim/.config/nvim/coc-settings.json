@@ -8,15 +8,16 @@
     "javascriptreact",
     "css",
     "html",
-    "vim",
     "prisma",
     "graphql"
   ],
+  "pairs.disableLanguages": ["vim"],
   "languageserver": {
     "sql": {
       "command": "sql-language-server",
       "args": ["up", "--method", "stdio"],
       "filetypes": ["sql", "mysql"]
     }
-  }
+  },
+  "clangd.path": "/home/svm/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd"
 }

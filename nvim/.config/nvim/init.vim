@@ -35,7 +35,7 @@
 
 	" Don't pass messages to |ins-completion-menu|.
 	set shortmess+=c
-	set autochdir
+
 " --------------------------------------------------------------------- 
 
 
@@ -97,7 +97,6 @@
 " --------------------------------------------------------------------- 
 " ===> Main Setup
 
-	" -> colorscheme
 	colorscheme jellybeans
 
 	" -> tabs
@@ -136,10 +135,15 @@
 
 	" -> spellcheck
 	autocmd BufRead,BufNewFile *.md setlocal spell
-	
+
+	" -> automatically change directory
+	autocmd BufEnter * silent! lcd %:p:h
+
 	" -> jsonc 
 	autocmd FileType json syntax match Comment +\/\/.\+$+
 
+	" -> dwmblocks
+	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 " --------------------------------------------------------------------- 
 
 
@@ -319,7 +323,8 @@
 
 	autocmd StdinReadPre * let s:std_in=1
 	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+	" -> autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+
 	" -> Run NERDTree and Integrated Terminal, if you are in a directory 
 	autocmd StdinReadPre * let s:std_in=1
 	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | call NerdTree() | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -333,6 +338,8 @@
 	let NERDTreeMinimalUI = 1
 	let NERDTreeDirArrows = 1
 
+	let g:NERDTreeHijackNetrw = 1
+	
 	" -> Autorefresh NERDTree
 	autocmd BufEnter NERD_tree_* | execute 'normal R'
 

@@ -29,8 +29,8 @@ set t_Co=256
 
 " ===> vim-plug config
 call plug#begin('/etc/xdg/nvim/site/autoload')	
-	" colorscheme
-	Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
+	" colorscheme	
+	Plug 'ghifarit53/tokyonight-vim'
 	" git
 	Plug 'tpope/vim-fugitive'
 	" statusbar
@@ -63,27 +63,15 @@ call plug#begin('/etc/xdg/nvim/site/autoload')
 call plug#end()
 
 " ===> Main Setup
- fun! s:load_color_def(group, def)
-    call s:X(a:group, get(a:def, "guifg", s:current_color(a:group, "fg", "gui")),
-    \                 get(a:def, "guibg", s:current_color(a:group, "bg", "gui")),
-    \                 get(a:def, "attr", s:current_attr(a:group)),
-    \                 get(a:def, "ctermfg", s:current_color(a:group, "fg", "cterm")),
-    \                 get(a:def, "ctermbg", s:current_color(a:group, "bg", "cterm")))
-    if !s:low_color
-      for l:prop in ["ctermfg", "ctermbg"]
-        let l:override_key = "256".l:prop
-        if has_key(a:def, l:override_key)
-          exec "hi ".a:group." ".l:prop."=".a:def[l:override_key]
-        endif
-      endfor
-    endif
-  endfun
+set termguicolors
 
-let g:jellybeans_overrides = {
-\    'background': { 'guibg': '1d1d1d' },
-\}
-colorscheme jellybeans
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
 
+colorscheme tokyonight
+
+" Lightline
+let g:lightline = { 'colorscheme': 'plastic' }
 let g:airline_powerline_fonts = 1
 
 " -> prettier config

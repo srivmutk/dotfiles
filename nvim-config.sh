@@ -16,6 +16,9 @@ stow -S nvim
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 	nvm install 14
 	nvm use 14
+  npm i -g sql-language-server
+
+pacman -S haskell-language-server
 
 # -> Make a spell file
 	mkdir nvim/.config/nvim/spell

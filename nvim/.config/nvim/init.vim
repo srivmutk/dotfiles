@@ -26,11 +26,19 @@ set updatetime=300
 set shortmess+=c
 " colors
 set t_Co=256
+filetype plugin indent on
+" On pressing tab, insert 2 spaces
+set expandtab
+" show existing tab with 2 spaces width
+set tabstop=2
+set softtabstop=2
+" when indenting with '>', use 2 spaces width
+set shiftwidth=2
 
 " ===> vim-plug config
 call plug#begin('/etc/xdg/nvim/site/autoload')	
 	" colorscheme	
-	Plug 'ghifarit53/tokyonight-vim'
+	Plug 'ghifarit53/tokyonight-vim'	
 	" git
 	Plug 'tpope/vim-fugitive'
 	" statusbar
@@ -40,8 +48,9 @@ call plug#begin('/etc/xdg/nvim/site/autoload')
 	Plug 'preservim/nerdtree'
 	" icons on filetree
 	Plug 'ryanoasis/vim-devicons'
-	" md preview & yaml formatting
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+	" If you have nodejs and yarn
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  " md preview & yaml formatting
 	Plug 'tarekbecker/vim-yaml-formatter'
 	" autocompletion and error messages 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -58,16 +67,12 @@ call plug#begin('/etc/xdg/nvim/site/autoload')
 	Plug 'junegunn/goyo.vim'
 	" comment out lines
 	Plug 'tpope/vim-commentary'
-	" surround
-	Plug 'tpope/vim-surround'
 call plug#end()
 
 " ===> Main Setup
 set termguicolors
-
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-
 colorscheme tokyonight
 
 " Lightline
@@ -99,11 +104,11 @@ autocmd! BufWritePre Prettier
 	map <C-s> :w <CR>
 	map <C-u> :u<CR>
 	map <C-r> :redo<CR>
-	map <C-l> :wqa <CR>
 	map <C-q> :q <CR>
 
 	map <C-t> :call Term()<CR>
-	map <C-m> :MarkdownPreview <CR>
+	nmap mdp :MarkdownPreview <Enter>
+  map <C-g> :Goyo <CR>
 
 " -> spellcheck
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -115,17 +120,22 @@ autocmd BufEnter * silent! lcd %:p:h
 " -> jsonc 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+let g:netrw_browser_viewer='open'
+
 " -> dwmblocks
 autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 
+" -> remove squigglys after line
 set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
+
+
+autocmd BufWritePre FileType go nmap <leader>r <Plug>(go-fmt)
 
 
 " ===> coc.nvim Setup
 
 " coc language extensions
 let g:coc_global_extensions = [
-	\'coc-markdownlint',
 	\'coc-highlight',
 	\'coc-vetur',
 	\'coc-go',
@@ -134,16 +144,12 @@ let g:coc_global_extensions = [
 	\'coc-tsserver', 
 	\'coc-sh', 
 	\'coc-git',
-	\'coc-prisma', 
-	\'coc-pairs',
 	\'coc-prettier',
-	\'coc-go',
 	\'coc-clangd',
 	\'coc-elixir',
 	\'coc-css',
 	\'coc-tailwindcss',
 	\'coc-html',
-	\'coc-rls'
 \]
 
 " Always show the signcolumn, otherwise it would shift the text each time
